@@ -240,6 +240,8 @@ public class FlumeNode implements Reportable {
       try {
         http.stop();
       } catch (InterruptedException e) {
+      } catch (Exception e) {
+        LOG.error("Stopping http server failed: " + e);
       }
     }
 
