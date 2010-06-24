@@ -99,9 +99,8 @@ to call at top-level: ant deploy-contrib compile-core-test
   <property name="build.dir.eclipse-main-classes" value="${build.dir.eclipse}/classes-main"/>
   <property name="build.dir.eclipse-test-classes" value="${build.dir.eclipse}/classes-test"/>
 
-  <!-- the normal classpath -->
-  <path id="classpath">
-    <pathelement location="${build.classes}"/>
+  <path id="libs.classpath">
+    <pathelement location="${conf.dir}"/>
     <fileset dir="${lib.dir}">
       <include name="**/*.jar" />
       <exclude name="**/excluded/" />
@@ -110,7 +109,12 @@ to call at top-level: ant deploy-contrib compile-core-test
       <include name="**/*.jar" />
       <exclude name="**/excluded/" />
     </fileset>
-    <pathelement location="${conf.dir}"/>
+  </path>
+
+  <!-- the normal classpath -->
+  <path id="classpath">
+    <pathelement location="${build.classes}"/>
+    <path refid="libs.classpath"/>
   </path>
 
   <!-- the unit test classpath: uses test.src.dir for configuration -->
@@ -902,14 +906,15 @@ to call at top-level: ant deploy-contrib compile-core-test
         <source path="${aho.src.dir}"
                 output="${build.dir.eclipse-main-classes}" />
         <source path="${thrift.gen.dir}"
-                output="${build.dir.eclipse-main-classes}" />
+                output="${build.dir.eclipse-main-classes}"
+                excluding="com/cloudera/flume/conf/RuntimeRecognitionException.java" />
         <source path="${perf.src.dir}"
                 output="${build.dir.eclipse-main-classes}" />
         <source path="${test.src.dir}"
                 output="${build.dir.eclipse-test-classes}" />
 
         <output path="${build.dir.eclipse-main-classes}" />
-        <library pathref="classpath" />
+        <library pathref="libs.classpath" />
         <library pathref="default.path.id" exported="true" />
         <library pathref="junit.path.id" exported="false" />
       </classpath>
