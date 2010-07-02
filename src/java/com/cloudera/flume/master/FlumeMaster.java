@@ -293,7 +293,7 @@ public class FlumeMaster implements Reportable {
     } catch (InterruptedException e) {
       LOG.warn("Interrupted when shutting down master... " + e.getMessage());
       LOG.debug(e, e);
-    } catch (IOException e) {
+    } catch (Exception e) {
       LOG.error("Exception when shutting down master! " + e.getMessage());
       LOG.debug(e, e);
     }
