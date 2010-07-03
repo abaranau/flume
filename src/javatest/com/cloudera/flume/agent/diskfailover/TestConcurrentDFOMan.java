@@ -59,10 +59,10 @@ import com.cloudera.util.FileUtil;
 public class TestConcurrentDFOMan {
   public static Logger LOG = Logger.getLogger(TestConcurrentDFOMan.class);
 
-  @Before
-  public void setDebug() {
-    Logger.getRootLogger().setLevel(Level.DEBUG);
-  }
+//  @Before
+//  public void setDebug() {
+//    Logger.getRootLogger().setLevel(Level.DEBUG);
+//  }
 
   @Test
   public void test1thread() throws IOException, InterruptedException {
